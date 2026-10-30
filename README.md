@@ -1,90 +1,117 @@
 # TasteMate AI — Frontend
 
-TasteMate AI helps people discover movies, restaurants, and hotels through a guided, conversational experience. This repository contains the responsive React frontend; recommendation data and conversation prompts are supplied by the companion Express API.
+TasteMate AI is an AI-powered personalized recommendation platform that helps users discover movies, restaurants, and hotels through an interactive chatbot experience.
+
+This repository contains the responsive frontend, built with React and TypeScript. It communicates with the companion Express.js backend to collect user preferences and display personalized recommendations.
 
 ## Features
 
-- Category selection for Movies, Restaurants, and Hotels
-- Category-specific questions and quick replies from the backend
-- Free-text answers, including destination entry for hotel searches
-- Recommendation cards with match scores, explanations, and imagery
-- Save and unsave recommendations during the current session
-- Responsive desktop and mobile layouts
-- Configurable backend URL through a Vite environment variable
+- Category selection for Movies, Restaurants, and Hotels.
+- Category-specific chatbot questions and quick replies.
+- Free-text answers, including destination entry for hotel searches.
+- Recommendation cards with match scores, explanations, and images.
+- Save and unsave recommendations during the current session.
+- Responsive desktop and mobile layouts.
+- Configurable backend URL through environment variables.
 
-## Tech stack
+## Tech Stack
 
-- React 18 and TypeScript
+- React 18
+- TypeScript
 - Vite 6
-- Tailwind CSS 3 with project-specific styles
-- Native `fetch` for backend requests
+- Tailwind CSS 3
+- Native Fetch API
 
-## Requirements
+## Run Locally
 
-- Node.js 18 or newer
-- npm
-- The TasteMate backend running locally or at a reachable API URL
+**Prerequisites:** Node.js 18 or newer and npm.
 
-## Getting started
+**1. Clone the repository**
 
-From the repository root, open two terminals.
-
-### 1. Start the backend
-
-```powershell
-cd backend-be
-npm install
-npm run dev
+```bash
+git clone https://github.com/Muhammad-Husnain007/qloo-hackathon-fe.git
+cd qloo-hackathon-fe
 ```
 
-By default, the API listens at `http://localhost:3001`.
+**2. Install dependencies**
 
-### 2. Start the frontend
+```bash
+npm install
+```
+
+**3. Configure environment variables**
+
+Copy `.env.example` to `.env`:
 
 ```powershell
-cd frontend-fe
-npm install
 Copy-Item .env.example .env
-npm run dev
 ```
 
-Open the local URL printed by Vite, usually `http://localhost:5173`.
+By default, the frontend connects to:
 
-The frontend defaults to `http://localhost:3001/api`. The `.env` file is optional when using that default. To use another backend URL, set `VITE_API_URL` in `frontend-fe/.env`:
+```text
+http://localhost:3001/api
+```
+
+If your backend runs at another URL, configure `VITE_API_URL` in `.env`:
 
 ```dotenv
 VITE_API_URL=http://localhost:3001/api
 ```
 
-Restart the Vite server after changing environment variables. Keep secrets such as LLM API keys in the backend environment; they do not belong in frontend variables.
+**4. Start the development server**
 
-## Available scripts
+```bash
+npm run dev
+```
 
-| Command | Description |
-| --- | --- |
-| `npm run dev` | Start the Vite development server. |
-| `npm run build` | Type-check the project and create a production build in `dist/`. |
-| `npm run preview` | Serve the production build locally for review. |
+**5. Open the application**
 
-## Backend integration
-
-The chat client sends the selected category, answers so far, and conversation history to `POST /api/chat`. The backend returns either the next question and quick replies or a recommendation list. Recommendation text and match data come from the API; the frontend maps known recommendations to local presentation images.
-
-If the API cannot be reached, confirm that the backend is running and that its `FRONTEND_ORIGIN` setting allows the Vite origin (`http://localhost:5173`). The backend can return mock recommendations without an LLM API key.
-
-## Project structure
+Visit the local URL provided by Vite, usually:
 
 ```text
-frontend-fe/
-├── index.html
-├── src/
-│   ├── services/api.ts   # API requests and response mapping
-│   ├── App.tsx           # Chat interface and application state
-│   ├── data.ts           # Category labels and recommendation images
-│   ├── icons.tsx         # Local SVG icon components
-│   ├── styles.css        # Tailwind layers and responsive styles
-│   └── main.tsx          # React application entry point
-├── .env.example
-├── package.json
-└── vite.config.ts
+http://localhost:5173
 ```
+
+Make sure the companion TasteMate AI backend is running before using the chatbot.
+
+## Available Scripts
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Start the development server. |
+| `npm run build` | Type-check and create the production build. |
+| `npm run preview` | Preview the production build locally. |
+
+## Backend Integration
+
+The frontend communicates with the TasteMate AI backend through REST API requests.
+
+The chatbot sends the selected category, user answers, and conversation history to `POST /api/chat`.
+
+The backend processes the conversation and returns either the next question or personalized recommendations.
+
+For backend setup, visit the [TasteMate AI Backend Repository](https://github.com/Muhammad-Husnain007/qloo-hackathon-be).
+
+## Project Structure
+
+```text
+src/
+├── services/
+│   └── api.ts          # API requests and response mapping
+├── App.tsx             # Chat interface and application state
+├── data.ts             # Category labels and recommendation images
+├── icons.tsx           # SVG icon components
+├── styles.css          # Tailwind and responsive styles
+└── main.tsx            # React application entry point
+```
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+**Developed by Muhammad Husnain**
+
+TasteMate AI — Discover what you love.
